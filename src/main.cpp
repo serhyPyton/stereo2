@@ -1,5 +1,6 @@
 #include <iostream>
 #include <armadillo>
+#include <math.h>
 
 #include "reader.h"
 #include "util.h"
@@ -13,7 +14,7 @@ int main() {
 
     size_t quality = 0;
     arma::mat F_fin;
-    for (int it = 0; it < 20; it++) {
+    for (int it = 0; it < 500; it++) {
         auto mat = arma::mat(7, 9);
         for (int i = 0; i < 7; i++) {
             auto pt = util::random(shifts);  //take random point
@@ -27,7 +28,7 @@ int main() {
             mat.at(i, 7) = pt[1].y;
             mat.at(i, 8) = 1;
         }
-        arma::mat null = arma::null(mat, 2); //nullspace
+        arma::mat null = arma::null(mat, 0.01); //nullspace
         arma::mat F0 = arma::reshape(null.col(0), 3, 3).t();
         arma::mat F1 = arma::reshape(null.col(1), 3, 3).t();
 
@@ -58,8 +59,8 @@ int main() {
                 {
                     arma::mat x_l = {double(i), double(j), 1};
                     arma::mat x_r = {double(i + shifts[i][j].x), double(j + shifts[i][j].y), 1};
-                    arma::mat err = x_r*F*x_l.t();
-                    if (err[0] < 1E-8)
+                    arma::mat err = arma::abs(x_r*F*x_l.t());
+                    if (err[0] < 1E-3)
                     {
                         hits++;
                     }
@@ -82,6 +83,7 @@ int main() {
     {
         auto pt = util::random(shifts);
         writer::draw_cross(L, pt[0].x, pt[0].y);
+        writer::draw_cross(R, pt[1].x, pt[1].y);
 
         arma::mat x0 = {double(pt[0].x), double(pt[0].y), 1.};
         arma::mat M = F_fin*x0.t(); //epipolar line eq

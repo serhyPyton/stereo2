@@ -65,7 +65,7 @@ namespace writer
         int width = img[0].size();
         for(int i=y-3; i< y+3; i++) {
             for(int j=x-3; j< x+3; j++) {
-                if (i<0 || j<0 || i>height || j>width)
+                if (i<0 || j<0 || i>=height || j>=width)
                     continue;
                 img[i][j].r = 255;
                 img[i][j].g = 0;

@@ -114,6 +114,18 @@ tinyexr.h
 CImg.h
 /home/makarenko/CLionProjects/lab2/src/CImg/CImg.h
 
+/home/makarenko/CLionProjects/lab2/src/main.cpp
+iostream
+-
+armadillo
+-
+math.h
+-
+reader.h
+/home/makarenko/CLionProjects/lab2/src/reader.h
+util.h
+/home/makarenko/CLionProjects/lab2/src/util.h
+
 /home/makarenko/CLionProjects/lab2/src/reader.h
 fstream
 -
@@ -128,7 +140,11 @@ vector
 CImg/CImg.hpp
 /home/makarenko/CLionProjects/lab2/src/CImg/CImg.hpp
 
-/home/makarenko/CLionProjects/lab2/src/writer.cpp
-reader.h
-/home/makarenko/CLionProjects/lab2/src/reader.h
+/home/makarenko/CLionProjects/lab2/src/util.h
+random
+-
+iostream
+-
+array
+-
 
